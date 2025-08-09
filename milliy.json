@@ -1,0 +1,30 @@
+[
+  {
+    "id": "10",
+    "nomi": "Palov",
+    "rasm": "./img/palov.webp",
+    "tavsif": "An’anaviy o‘zbek palovi — guruch, sabzi va go‘shtdan tayyorlanadi.",
+    "narx": 30000
+  },
+  {
+    "id": "11",
+    "nomi": "Manti",
+    "rasm": "./img/manti.png",
+    "tavsif": "Bug‘da pishirilgan go‘shtli manti — milliy taomimiz.",
+    "narx": 28000
+  },
+  {
+    "id": "12",
+    "nomi": "Lag‘mon",
+    "rasm": "./img/lag,om.png",
+    "tavsif": "Qo‘l mehnati bilan tayyorlangan noodlarni sabzavotli sho‘rva bilan.",
+    "narx": 27000
+  },
+  {
+    "id": "13",
+    "nomi": "Norin",
+    "rasm": "./img/image.png",
+    "tavsif": "Qovurilgan go‘sht va maxsus noodlardan tayyorlangan milliy taom.",
+    "narx": 29000
+  }
+]

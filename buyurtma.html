@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="uz">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Turkiston Restorani - Buyurtma</title>
+    <style>
+        /* ===== Global ===== */
+        :root {
+            --brand: #0D3B52;
+            --accent: #E9A825;
+            --accent-dark: #d0911f;
+        }
+
+        * {
+            box-sizing: border-box
+        }
+
+        body {
+            margin: 0;
+            font-family: sans-serif;
+            background: #f5f5f5;
+            color: #1f2937;
+        }
+
+        /* ===== Header / Navbar ===== */
+        header {
+            background-color: var(--brand);
+            color: white;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            position: relative;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 22px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .logo img {
+            width: 60px;
+            margin-right: 10px;
+        }
+
+        /* Nav container */
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        /* Desktop links (horizontal) */
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 18px;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 6px 8px;
+            border-radius: 4px;
+            transition: background .15s, color .15s;
+            white-space: nowrap;
+        }
+
+        .nav-links a:hover,
+        .nav-links a:focus {
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--accent);
+            outline: none;
+        }
+
+        /* Burger button (hidden on desktop) */
+        .burger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            gap: 5px;
+        }
+
+        .burger div {
+            width: 25px;
+            height: 3px;
+            background-color: white;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile menu (hidden by default) */
+        .mobile-menu {
+            display: none;
+        }
+
+        /* ===== Rest of page ===== */
+        .order-section {
+            max-width: 900px;
+            margin: 28px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+        }
+
+        h2 {
+            color: var(--brand);
+            margin-bottom: 10px;
+        }
+
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 20px;
+        }
+
+        .product {
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+            background: #fafafa;
+        }
+
+        .product img {
+            width: 100%;
+            border-radius: 4px;
+        }
+
+        .product-title {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        .product-price {
+            color: var(--accent);
+            font-weight: bold;
+        }
+
+        .cart {
+            margin-top: 30px;
+            border-top: 2px solid #eee;
+            padding-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        table th,
+        table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        .total {
+            text-align: right;
+            font-size: 18px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .form-section {
+            margin-top: 30px;
+            border-top: 2px solid #eee;
+            padding-top: 20px;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0 15px 0;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+
+        button {
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: var(--accent-dark);
+        }
+
+        .history {
+            margin-top: 30px;
+            border-top: 2px solid #eee;
+            padding-top: 20px;
+        }
+
+        .history-card {
+            background: #f9f9f9;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            margin-bottom: 10px;
+        }
+
+        .delete-btn {
+            background: red;
+            color: white;
+            padding: 6px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 5px;
+        }
+
+        .delete-btn:hover {
+            background: darkred;
+        }
+
+        /* ===== Responsive behaviour ===== */
+        @media (max-width: 880px) {
+
+            /* Show burger on smaller screens */
+            .burger {
+                display: flex;
+            }
+
+            /* Hide desktop links */
+            .nav-links {
+                display: none;
+            }
+
+            /* Mobile menu: slide-in panel */
+            .mobile-menu {
+                display: none;
+                /* initially hidden */
+                position: absolute;
+                top: 100%;
+                right: 12px;
+                width: 220px;
+                background: var(--brand);
+                border-radius: 8px;
+                box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+                padding: 8px 6px;
+                z-index: 120;
+                transform-origin: top right;
+            }
+
+            .mobile-menu.open {
+                display: block;
+                animation: drop-in .18s ease;
+            }
+
+            .mobile-menu a {
+                display: block;
+                padding: 10px 12px;
+                color: white;
+                text-decoration: none;
+                font-weight: 700;
+                border-radius: 6px;
+            }
+
+            .mobile-menu a:hover,
+            .mobile-menu a:focus {
+                background: rgba(255, 255, 255, 0.06);
+                color: var(--accent);
+                outline: none;
+            }
+        }
+
+        @keyframes drop-in {
+            from {
+                transform: translateY(-6px) scale(.98);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0) scale(1);
+                opacity: 1;
+            }
+        }
+
+        /* Optional: small tweak for very small screens */
+        @media (max-width:420px) {
+            .mobile-menu {
+                right: 8px;
+                width: 180px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <div class="logo">
+            <img src="./logo.png" alt="Turkiston logosi">
+            TURKISTON
+        </div>
+
+        <nav>
+            <!-- Desktop links (hidden on small screens) -->
+            <ul class="nav-links" aria-hidden="false">
+                <li><a href="./index.html">Bosh sahifa</a></li>
+                <li><a href="#">Menyu</a></li>
+                <li><a href="#">Biz haqimizda</a></li>
+                <li><a href="#">Aloqa</a></li>
+                <li><a href="./reg.html">Profil</a></li>
+            </ul>
+
+            <!-- Burger button -->
+            <div class="burger" aria-label="Menyu ochish" role="button" tabindex="0">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+
+            <!-- Mobile menu (contains same links) -->
+            <div id="mobile-menu" class="mobile-menu" role="menu" aria-hidden="true">
+                <a href="./index.html" role="menuitem">Bosh sahifa</a>
+                <a href="#" role="menuitem">Menyu</a>
+                <a href="#" role="menuitem">Biz haqimizda</a>
+                <a href="#" role="menuitem">Aloqa</a>
+                <a href="./reg.html" role="menuitem">Profil</a>
+            </div>
+        </nav>
+    </header>
+
+    <div class="order-section">
+        <h2>🍽 Buyurtma berish</h2>
+        <div class="product-list" id="product-list"></div>
+
+        <div class="cart">
+            <h3>🛒 Sizning savatingiz</h3>
+            <table id="cart-table">
+                <thead>
+                    <tr>
+                        <th>Mahsulot</th>
+                        <th>Narx</th>
+                        <th>Soni</th>
+                        <th>Jami</th>
+                        <th>O‘chirish</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <div class="total" id="total">Umumiy summa: 0 so‘m</div>
+        </div>
+
+        <div class="form-section">
+            <h3>📋 Ma’lumotlaringiz</h3>
+            <input type="text" id="name" placeholder="Ismingiz" required>
+            <input type="tel" id="phone" placeholder="Telefon raqamingiz" required>
+            <input type="text" id="address" placeholder="Yetkazib berish manzili" required>
+
+            <label>To‘lov turi:</label>
+            <select id="payment">
+                <option value="Naqd">Naqd</option>
+                <option value="Karta">Karta</option>
+                <option value="Onlayn">Onlayn to‘lov</option>
+            </select>
+
+            <button onclick="submitOrder()">✅ Buyurtmani tasdiqlash</button>
+        </div>
+
+        <div class="history">
+            <h3>📜 Buyurtma tarixi</h3>
+            <div id="history-list"></div>
+        </div>
+    </div>
+
+    <script>
+        /* ===== Navbar: burger toggle + keyboard accessibility ===== */
+        const burgerBtn = document.querySelector('.burger');
+        const mobileMenu = document.getElementById('mobile-menu');
+
+        function openMobileMenu() {
+            mobileMenu.classList.add('open');
+            mobileMenu.setAttribute('aria-hidden', 'false');
+            burgerBtn.setAttribute('aria-expanded', 'true');
+            // move focus to first link for keyboard users
+            const first = mobileMenu.querySelector('a');
+            if (first) first.focus();
+            // click outside to close
+            document.addEventListener('click', outsideClickListener);
+            document.addEventListener('keydown', escapeListener);
+        }
+
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('open');
+            mobileMenu.setAttribute('aria-hidden', 'true');
+            burgerBtn.setAttribute('aria-expanded', 'false');
+            document.removeEventListener('click', outsideClickListener);
+            document.removeEventListener('keydown', escapeListener);
+            burgerBtn.focus();
+        }
+
+        function outsideClickListener(e) {
+            if (!mobileMenu.contains(e.target) && !burgerBtn.contains(e.target)) {
+                closeMobileMenu();
+            }
+        }
+
+        function escapeListener(e) {
+            if (e.key === 'Escape') closeMobileMenu();
+        }
+
+        burgerBtn.addEventListener('click', (e) => {
+            const isOpen = mobileMenu.classList.contains('open');
+            if (isOpen) closeMobileMenu();
+            else openMobileMenu();
+        });
+
+        // support Enter / Space toggling on burger (for accessibility)
+        burgerBtn.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                burgerBtn.click();
+            }
+        });
+
+        /* ===== Order page logic (unchanged, adapted from your script) ===== */
+        const API_URL = "https://jsonplaceholder.typicode.com/posts";
+
+        const products = [
+            { name: "Burger", price: 25000, img: "./img/burger_sandwich_PNG96712.png" },
+            { name: "Sendvich", price: 18000, img: "./img/grilled-cheese-sandwichwith-vegetables-3v4qk5xdz2v0miip.png" },
+            { name: "Kartoshka fri", price: 12000, img: "./img/Kartofel-fri-min.png" },
+            { name: "Sharbat", price: 10000, img: "./img/d-43.webp" }
+        ];
+
+        const productList = document.getElementById("product-list");
+        const cartTable = document.querySelector("#cart-table tbody");
+        const totalDiv = document.getElementById("total");
+        const historyList = document.getElementById("history-list");
+
+        let cart = [];
+
+        function renderProducts() {
+            productList.innerHTML = "";
+            products.forEach((product, index) => {
+                const div = document.createElement("div");
+                div.classList.add("product");
+                div.innerHTML = `
+                <img src="${product.img}" alt="${product.name}">
+                <div class="product-title">${product.name}</div>
+                <div class="product-price">${product.price.toLocaleString()} so‘m</div>
+                <input type="number" id="qty-${index}" min="1" value="1" aria-label="Soni ${product.name}">
+                <button onclick="addToCart(${index})">Qo‘shish</button>
+            `;
+                productList.appendChild(div);
+            });
+        }
+
+        function addToCart(index) {
+            const qtyEl = document.getElementById(`qty-${index}`);
+            const qty = parseInt(qtyEl.value) || 1;
+            const product = products[index];
+            const existing = cart.find(item => item.name === product.name);
+            if (existing) {
+                existing.qty += qty;
+            } else {
+                cart.push({ ...product, qty });
+            }
+            renderCart();
+        }
+
+        function renderCart() {
+            cartTable.innerHTML = "";
+            let total = 0;
+            cart.forEach((item, i) => {
+                const row = document.createElement("tr");
+                row.innerHTML = `
+                <td>${item.name}</td>
+                <td>${item.price.toLocaleString()} so‘m</td>
+                <td>${item.qty}</td>
+                <td>${(item.price * item.qty).toLocaleString()} so‘m</td>
+                <td><button onclick="removeFromCart(${i})" aria-label="O'chirish ${item.name}">❌</button></td>
+            `;
+                cartTable.appendChild(row);
+                total += item.price * item.qty;
+            });
+            totalDiv.innerText = `Umumiy summa: ${total.toLocaleString()} so‘m`;
+        }
+
+        function removeFromCart(i) {
+            cart.splice(i, 1);
+            renderCart();
+        }
+
+        async function submitOrder() {
+            if (cart.length === 0) {
+                alert("Savat bo‘sh! Avval mahsulot tanlang.");
+                return;
+            }
+            const name = document.getElementById("name").value;
+            const phone = document.getElementById("phone").value;
+            const address = document.getElementById("address").value;
+            const payment = document.getElementById("payment").value;
+
+            if (!name || !phone || !address) {
+                alert("Iltimos, barcha maydonlarni to‘ldiring!");
+                return;
+            }
+
+            const order = {
+                name,
+                phone,
+                address,
+                payment,
+                items: [...cart],
+                date: new Date().toLocaleString()
+            };
+
+            let history = JSON.parse(localStorage.getItem("orderHistory")) || [];
+            history.push(order);
+            localStorage.setItem("orderHistory", JSON.stringify(history));
+
+            try {
+                let response = await fetch(API_URL, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(order)
+                });
+                let result = await response.json();
+                console.log("Server javobi:", result);
+                alert(`Rahmat ${name}! Buyurtmangiz serverga yuborildi.`);
+            } catch (error) {
+                console.error("Xato:", error);
+                alert("Server bilan bog‘lanishda xatolik!");
+            }
+
+            cart = [];
+            renderCart();
+            renderHistory();
+        }
+
+        function renderHistory() {
+            historyList.innerHTML = "";
+            let history = JSON.parse(localStorage.getItem("orderHistory")) || [];
+            if (history.length === 0) {
+                historyList.innerHTML = "<p>Hozircha buyurtmalar tarixi yo‘q.</p>";
+                return;
+            }
+            history.forEach((order, index) => {
+                const div = document.createElement("div");
+                div.classList.add("history-card");
+                div.innerHTML = `
+                <strong>${order.name}</strong> (${order.phone}) - ${order.date} <br>
+                Manzil: ${order.address} <br>
+                To‘lov: ${order.payment} <br>
+                Mahsulotlar: ${order.items.map(i => `${i.name} x${i.qty}`).join(", ")}
+                <br>
+                <button class="delete-btn" onclick="deleteOrder(${index})">❌ O‘chirish</button>
+            `;
+                historyList.appendChild(div);
+            });
+        }
+
+        function deleteOrder(index) {
+            let history = JSON.parse(localStorage.getItem("orderHistory")) || [];
+            history.splice(index, 1);
+            localStorage.setItem("orderHistory", JSON.stringify(history));
+            renderHistory();
+        }
+
+        // init
+        renderProducts();
+        renderHistory();
+    </script>
+
+</body>
+
+</html>

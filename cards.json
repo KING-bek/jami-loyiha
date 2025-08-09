@@ -1,0 +1,30 @@
+[
+  {
+    "id": "1",
+    "nomi": "Burger",
+    "rasm": "./img/burger_sandwich_PNG96712.png",
+    "tavsif": "Burgerimiz yangi, mazali va to‘yingan go‘sht bilan tayyorlangan. O‘ziga xos maxfiy sous va yangi sabzavotlar bilan to‘ldirilgan. Har doim yangi va sifatli ingredientlardan foydalaniladi.",
+    "narx": 25000
+  },
+  {
+    "id": "2",
+    "nomi": "Sendvich",
+    "rasm": "./img/grilled-cheese-sandwichwith-vegetables-3v4qk5xdz2v0miip.png",
+    "tavsif": "Sendvichimiz issiq va xushbo‘y pishloq bilan to‘ldirilgan, yangi sabzavotlar va maxsus sous bilan bezatilgan. Bu — tez va mazali nonushta yoki tushlik uchun ajoyib tanlov.",
+    "narx": 18000
+  },
+  {
+    "id": "3",
+    "nomi": "Kartoshka fri",
+    "rasm": "./img/Kartofel-fri-min.png",
+    "tavsif": "Qovurilgan kartoshka fri — oltin rangda, xushbo‘y va juda qarsilloq. Unga maxsus tuz va ziravorlar sepilgan bo‘lib, har qanday taom bilan ajoyib uyg‘unlashadi.",
+    "narx": 12000
+  },
+  {
+    "id": "4",
+    "nomi": "Sharbat",
+    "rasm": "./img/d-43.webp",
+    "tavsif": "Tabiiy mevalardan tayyorlangan, shirin va sovuq sharbat. Sizga tetiklashtiruvchi va yoqimli lazzat beradi. Har xil mevalardan tayyorlangan sharbatlarimiz mavjud.",
+    "narx": 8000
+  }
+]
